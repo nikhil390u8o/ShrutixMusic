@@ -1,13 +1,12 @@
 # server.py
 from flask import Flask
-import os
 
 app = Flask(__name__)
 
 @app.route("/")
-def home():
-    return "ShrutiMusic Bot is running!"
+def index():
+    return "✅ Shrutix Music Bot is alive and running!"
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+@app.route("/health")
+def health():
+    return {"status": "ok"}
