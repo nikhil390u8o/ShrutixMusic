@@ -57,9 +57,7 @@ async def init():
     except:
         pass
     await Shruti.decorators()
-    LOGGER("ShrutixMusic").info(
-        "Shrutix Music Bot Started Successfully.\n\nDon't forget to visit @ShrutiBots"
-    )
+    LOGGER("ShrutixMusic").info("Shrutix Music Bot Started Successfully.")
     await idle()
     await nand.stop()
     await userbot.stop()
@@ -67,5 +65,8 @@ async def init():
 
 
 if __name__ == "__main__":
+    # 🔹 Start Flask server in a background thread
     threading.Thread(target=run_server).start()
+
+    # 🔹 Start the bot event loop
     asyncio.get_event_loop().run_until_complete(init())
