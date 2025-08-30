@@ -11,24 +11,18 @@ from ShrutixMusic.misc import sudo
 from ShrutixMusic.plugins import ALL_MODULES
 from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
-import os
 import threading
-from flask import Flask
+from server import app
+import os
 
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Bot is alive!"
-
-def run_web():
-    port = int(os.environ.get("PORT", 8080))
+def run_server():
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
 
-# Start bot + web server
 if __name__ == "__main__":
-    threading.Thread(target=run_web).start()
-    # start your bot here
+    threading.Thread(target=run_server).start()
+    asyncio.get_event_loop().run_until_complete(init())  # your bot init
+
 
 
 async def init():
