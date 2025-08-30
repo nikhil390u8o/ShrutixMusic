@@ -15,14 +15,14 @@ from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 import threading
 from server import app
+import os
 
 def run_server():
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
-if __name__ == "__main__":
-    threading.Thread(target=run_server).start()
-    # start your bot normally here
+threading.Thread(target=run_server).start()
+
 
 
 
