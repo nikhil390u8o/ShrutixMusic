@@ -13,17 +13,13 @@ from ShrutixMusic.misc import sudo
 from ShrutixMusic.plugins import ALL_MODULES
 from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
-import threading
 from server import app
-import os
 
+
+# ✅ Run Flask server for Render
 def run_server():
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 10000))  # Render injects PORT
     app.run(host="0.0.0.0", port=port)
-
-threading.Thread(target=run_server).start()
-
-
 
 
 async def init():
@@ -46,12 +42,16 @@ async def init():
             BANNED_USERS.add(user_id)
     except:
         pass
+
     await nand.start()
+
     for all_module in ALL_MODULES:
         importlib.import_module("ShrutixMusic.plugins." + all_module)
     LOGGER("ShrutixMusic.plugins").info("Successfully Imported Modules...")
+
     await userbot.start()
     await Shruti.start()
+
     try:
         await Shruti.stream_call("https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4")
     except NoActiveGroupCall:
@@ -61,8 +61,12 @@ async def init():
         exit()
     except:
         pass
+
     await Shruti.decorators()
-    LOGGER("ShrutixMusic").info("Shrutix Music Bot Started Successfully.")
+    LOGGER("ShrutixMusic").info(
+        "Shrutix Music Bot Started Successfully.\n\nDon't forget to visit @ShrutiBots"
+    )
+
     await idle()
     await nand.stop()
     await userbot.stop()
@@ -70,8 +74,8 @@ async def init():
 
 
 if __name__ == "__main__":
-    # 🔹 Start Flask server in a background thread
+    # ✅ Start Flask server in background thread
     threading.Thread(target=run_server).start()
 
-    # 🔹 Start the bot event loop
     asyncio.get_event_loop().run_until_complete(init())
+
