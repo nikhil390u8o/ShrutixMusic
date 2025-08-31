@@ -17,7 +17,7 @@ import threading
 import os
 import threading
 from server import app   # import Flask app
-from ShrutixMusic import your_bot_start_function  # adjust this
+  # adjust this
 
 def run_flask():
     port = int(os.environ.get("PORT", 8080))  # Render provides this
