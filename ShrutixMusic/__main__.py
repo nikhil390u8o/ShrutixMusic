@@ -17,11 +17,16 @@ import threading
 from server import app
 import os
 
-def run_server():
-    port = int(os.environ.get("PORT", 10000))
+def run_flask():
+    port = int(os.environ.get("PORT", 8080))  # Render injects real $PORT
     app.run(host="0.0.0.0", port=port)
 
-threading.Thread(target=run_server).start()
+if __name__ == "__main__":
+    # Start Flask in a separate thread
+    threading.Thread(target=run_flask).start()
+
+    # Then continue with your existing bot code
+    from . import whatever_starts_your_bot
 
 
 
