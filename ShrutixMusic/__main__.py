@@ -13,26 +13,11 @@ from ShrutixMusic.misc import sudo
 from ShrutixMusic.plugins import ALL_MODULES
 from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
-import threading
-import os
-import threading
 from server import app   # import Flask app
-  # adjust this
 
 def run_flask():
     port = int(os.environ.get("PORT", 8080))  # Render provides this
     app.run(host="0.0.0.0", port=port)
-
-if __name__ == "__main__":
-    # Start Flask in background thread
-    threading.Thread(target=run_flask).start()
-    
-    # Start your bot
-    your_bot_start_function()
-
-
-
-
 
 async def init():
     if (
@@ -76,18 +61,14 @@ async def init():
     await userbot.stop()
     LOGGER("ShrutixMusic").info("Stopping ShrutixMusic Music Bot...")
 
-
-import threading, asyncio, server
-
 def start_bot():
     asyncio.run(init())
 
 if __name__ == "__main__":
-    # Start bot in background
-    threading.Thread(target=start_bot, daemon=True).start()
-    # Keep Flask alive on $PORT (Render needs this)
-    server.run()
-
+    # Start Flask in background thread
+    threading.Thread(target=run_flask).start()
+    # Start your bot
+    start_bot()
 
 
 
