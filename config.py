@@ -24,7 +24,7 @@ LOGGER_ID = int(getenv("LOGGER_ID"))
 
 # Get this value from @FallenxBot on Telegram by /id
 OWNER_ID = int(getenv("OWNER_ID", 7574330905))
-PORT = int(os.environ.get("PORT", 10000))  # 8080 fallback for local testing
+PORT = int(os.environ.get("PORT", 8000))  # 8080 fallback for local testing
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
