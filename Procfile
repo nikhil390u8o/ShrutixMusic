@@ -1,1 +1,1 @@
-web: python3 -m ShrutixMusic
+web: python3 start.py
