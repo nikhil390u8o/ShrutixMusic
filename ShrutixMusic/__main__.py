@@ -14,19 +14,22 @@ from ShrutixMusic.plugins import ALL_MODULES
 from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 import threading
-from server import app
 import os
+import threading
+from server import app   # import Flask app
+from ShrutixMusic import your_bot_start_function  # adjust this
 
 def run_flask():
-    port = int(os.environ.get("PORT", 8080))  # Render injects real $PORT
+    port = int(os.environ.get("PORT", 8080))  # Render provides this
     app.run(host="0.0.0.0", port=port)
 
 if __name__ == "__main__":
-    # Start Flask in a separate thread
+    # Start Flask in background thread
     threading.Thread(target=run_flask).start()
+    
+    # Start your bot
+    your_bot_start_function()
 
-    # Then continue with your existing bot code
-    from . import whatever_starts_your_bot
 
 
 
