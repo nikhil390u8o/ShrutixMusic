@@ -69,13 +69,17 @@ async def init():
     LOGGER("ShrutixMusic").info("Stopping ShrutixMusic Music Bot...")
 
 
-if __name__ == "__main__":
-    # ✅ Start Flask first in background
-    import server
-    threading.Thread(target=server.run, daemon=True).start()
+import threading, asyncio, server
 
-    # ✅ Then start bot
-    asyncio.get_event_loop().run_until_complete(init())
+def start_bot():
+    asyncio.run(init())
+
+if __name__ == "__main__":
+    # Start bot in background
+    threading.Thread(target=start_bot, daemon=True).start()
+    # Keep Flask alive on $PORT (Render needs this)
+    server.run()
+
 
 
 
