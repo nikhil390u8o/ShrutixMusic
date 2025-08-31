@@ -70,10 +70,12 @@ async def init():
 
 
 if __name__ == "__main__":
-    # 馃敼 Start Flask server in a background thread
-    threading.Thread(target=run_server).start()
+    # ✅ Start Flask first in background
+    import server
+    threading.Thread(target=server.run, daemon=True).start()
 
-    # 馃敼 Start the bot event loop
+    # ✅ Then start bot
     asyncio.get_event_loop().run_until_complete(init())
+
 
 
