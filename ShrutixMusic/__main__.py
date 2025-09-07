@@ -12,7 +12,7 @@ from ShrutixMusic.plugins import ALL_MODULES
 from ShrutixMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 
-WEBHOOK_URL = "https://panuspambothu.onrender.com"
+WEBHOOK_URL = "https://shrutixmusichu.onrender.com"
 PORT = "8000"
 
 
