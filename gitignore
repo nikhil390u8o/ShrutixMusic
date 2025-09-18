@@ -1,3 +1,5 @@
+.node/
+node.tar.xz
 .env
 .cache
 log.txt
