@@ -1,5 +1,7 @@
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
+from pyrogram.errors import FloodWait
+import asyncio
 
 import config
 
@@ -20,7 +22,19 @@ class Shruti(Client):
         )
 
     async def start(self):
-        await super().start()
+        while True:
+            try:
+                await super().start()
+                break  # login successful, exit loop
+            except FloodWait as e:
+                LOGGER(__name__).warning(
+                    f"⚠️ FloodWait detected: Telegram requires waiting {e.value} seconds. Sleeping..."
+                )
+                await asyncio.sleep(e.value)
+            except Exception as ex:
+                LOGGER(__name__).error(f"Unexpected error during start: {ex}")
+                raise  # re-raise unknown errors
+
         self.id = self.me.id
         self.name = self.me.first_name + " " + (self.me.last_name or "")
         self.username = self.me.username
